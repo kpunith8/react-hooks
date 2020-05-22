@@ -14,7 +14,7 @@ const LightIndicator = () => {
       interval = setInterval(() => setTimer(timer + 1), 1000);
     }
 
-    // return statement in the first param to useEffect() will clean up every time DOM updates
+    // return in useEffect() will clean up every time DOM updates
     return () => clearInterval(interval);
   }, [isOn, timer]);
 

@@ -30,13 +30,25 @@ const useOffline = () => {
 };
 
 const AmIOffline = () => {
-  const isOffline = useOffline();
+  const [isOffline] = useState(useOffline());
+  const [isOpen, setIsOpen] = useState(() => localStorage.getItem("name"));
+
+  useEffect(() => {
+    localStorage.setItem("name", isOpen);
+  }, [isOpen]);
 
   if (isOffline) {
-    return <div>Sorry, you are offline ...</div>;
+    return <div>Sorry, you are offline ..., </div>;
   }
 
-  return <div>You are online!</div>;
+  const setData = () => setIsOpen(!isOpen);
+
+  return (
+    <div>
+      <div onClick={setData}>You are online!</div>
+      {isOpen ? <p>Ready</p> : <p>Not Ready</p>}
+    </div>
+  );
 };
 
 export default AmIOffline;
