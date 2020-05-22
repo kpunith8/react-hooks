@@ -85,8 +85,8 @@ const useUpdateRenders = () => {
 
 const App = () => {
   return (
-    <div className="App">
-      <GameOfLife />
+    <div className="app">
+      <LoginForm />
     </div>
   );
 };
