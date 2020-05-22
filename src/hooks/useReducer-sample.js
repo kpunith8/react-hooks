@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from "react";
-import uuid from "uuid/v4";
+import { v4 } from "uuid";
 
 const initialTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
@@ -50,7 +50,7 @@ const ToDoApp = () => {
     if (itemName.length > 0) {
       dispatch({
         type: "ADD_ITEM",
-        payload: { id: uuid(), task: itemName.trim(), complete: false }
+        payload: { id: v4(), task: itemName.trim(), complete: false }
       });
 
       setItemName("");

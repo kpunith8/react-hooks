@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import "typeface-roboto";
 import ReactDOM from "react-dom";
 import ItemList from "./hooks/item-list-useState";
 import LightIndicator from "./hooks/useEffect-sample";
@@ -9,6 +10,8 @@ import LoginForm from "./components/LoginForm";
 import UseMemoSample from "./hooks/useMemo-sample";
 import { Quote } from "./components/Quote";
 import { KanyeQuote } from "./components/KanyeQuote";
+import GameOfLife from "./game-of-life/game-of-life";
+import "./styles.css";
 
 import "./styles.css";
 
@@ -80,7 +83,13 @@ const useUpdateRenders = () => {
   console.log(`Total renders ${renders.current++}`);
 };
 
-const App = () => <UseMemoSample />;
+const App = () => {
+  return (
+    <div className="App">
+      <GameOfLife />
+    </div>
+  );
+};
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
