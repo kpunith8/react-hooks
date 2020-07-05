@@ -1,7 +1,7 @@
 {
-  "name": "react-hooks-examples",
+  "name": "react-hooks-samples",
   "version": "1.0.0",
-  "description": "React hooks examples including testing, custom hooks, react testing library, mocking and more",
+  "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
