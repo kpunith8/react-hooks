@@ -6,10 +6,6 @@
   "main": "src/index.js",
   "dependencies": {
     "@material-ui/core": "4.11.0",
-    "@testing-library/dom": "7.20.0",
-    "@testing-library/jest-dom": "5.11.0",
-    "@testing-library/react": "10.4.3",
-    "@testing-library/react-hooks": "3.3.0",
     "axios": "0.19.2",
     "immer": "7.0.5",
     "react": "16.13.1",
@@ -20,11 +16,15 @@
     "typeface-roboto": "0.0.75",
     "uuid": "8.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "10.4.3",
+    "@testing-library/react-hooks": "3.3.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -32,5 +32,14 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
+  }
 }
