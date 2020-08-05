@@ -11,6 +11,7 @@ import UseMemoSample from "./hooks/useMemo-sample";
 import { Quote } from "./components/Quote";
 import { KanyeQuote } from "./components/KanyeQuote";
 import GameOfLife from "./game-of-life/game-of-life";
+import TicTacToe from "./tic-tac-toe/tic-tac-toe"
 import "./styles.css";
 
 import "./styles.css";
@@ -92,4 +93,4 @@ const App = () => {
 };
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<ToDoApp />, rootElement);
+ReactDOM.render(<TicTacToe />, rootElement);
