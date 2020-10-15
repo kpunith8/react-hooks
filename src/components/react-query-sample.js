@@ -1,9 +1,9 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import cookie from "cookie";
 import axios from "axios";
+import { getCookie } from "../utils/helpers";
 
-const IS_PRODUCTION = process.env.NODE_ENV === "production";
+// const IS_PRODUCTION = process.env.NODE_ENV === "production";
 const LOGIN_URL = "https://node-mongo-jwt-auth.herokuapp.com/api/user/login";
 const POSTS_URL = "https://node-mongo-jwt-auth.herokuapp.com/api/posts";
 
@@ -12,19 +12,17 @@ const loginRequest = async () => {
     email: "kpunith8@gmail.com",
     password: "temp123",
   });
+
   return await res.data;
 };
 
 const getPostsRequest = async () => {
-  const cookies = cookie.parse(document.cookie);
-  console.log({ cookies });
+  console.log(getCookie("auth-token"));
   const { data } = await axios.get(POSTS_URL, {
     headers: {
-      "auth-token": cookies["auth-token"],
+      "auth-token": getCookie("auth-token"),
     },
   });
-
-  console.log({ data });
 
   return data;
 };
@@ -50,15 +48,22 @@ const Posts = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {data?.posts.map((post) => (
+        <pre>{JSON.stringify(post, null, 2)}</pre>
+      ))}
       <button onClick={getPosts}>Get Posts</button>
     </div>
   );
 };
 
 const ReactQuerySample = () => {
-  const { data, isError, error, isLoading } = useQuery("login", loginRequest);
+  const { data, isError, error, isLoading, refetch } = useQuery(
+    "login",
+    loginRequest,
+    { enabled: false }
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [formValue, setFormValue] = useState({ email: "", password: "" });
 
   // Set a cookie after the successful login
   useEffect(() => {
@@ -70,6 +75,19 @@ const ReactQuerySample = () => {
     setIsLoggedIn(true);
   }, [data]);
 
+  const onInputChange = (e) => {
+    let updatedFormValue = { ...formValue };
+    updatedFormValue[e.target.name] = e.target.value;
+
+    setFormValue(updatedFormValue);
+  };
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+
+    refetch();
+  };
+
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
@@ -80,6 +98,27 @@ const ReactQuerySample = () => {
 
   return (
     <div>
+      <form onSubmit={onFormSubmit}>
+        <label>Email:</label>
+        <input
+          className="filed email"
+          type="text"
+          value={formValue["email"]}
+          name="email"
+          onChange={onInputChange}
+        />
+        <label>Password:</label>
+        <input
+          className="field password"
+          type="password"
+          value={formValue["password"]}
+          name="password"
+          onChange={onInputChange}
+        />
+        <button type="submit" className="btn-login">
+          Login
+        </button>
+      </form>
       {isLoggedIn ? <Posts loggedIn={isLoggedIn} /> : <div>No Permissions</div>}
     </div>
   );
