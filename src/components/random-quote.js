@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useFetch } from "../hooks/useFetch";
-import { useMeasure } from "../hooks/useMeasure";
+import { useFetch } from "../hooks/use-fetch";
+import { useMeasure } from "../hooks/use-measure";
 
 export const Quote = () => {
   const [quoteNumber, setQuoteNumber] = useState(

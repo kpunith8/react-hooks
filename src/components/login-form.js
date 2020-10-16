@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useForm } from "../hooks/useForm";
-import { Toggle } from "./Toggle";
+import { useForm } from "../hooks/use-form";
+import { Toggle } from "./toggle";
 
 // Form to demostragte the enter key behavior if the button type is
 // not mentioned
