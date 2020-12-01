@@ -5,11 +5,11 @@ export function makeServer({ environment = "test" } = {}) {
     environment,
 
     models: {
-      user: Model
+      user: Model,
     },
 
     seeds(server) {
-      server.create("user", { id: "1", name: "Bob" });
+      server.create("user", { id: "1", name: "Bob Jhon" });
       server.create("user", { id: "2", name: "Alice" });
     },
 
@@ -23,7 +23,13 @@ export function makeServer({ environment = "test" } = {}) {
 
         return schema.users.create(attrs);
       });
-    }
+
+      this.delete("/users/:id", (schema, request) => {
+        const id = request.params.id;
+
+        return schema.users.find(id).destroy();
+      });
+    },
   });
 
   return server;

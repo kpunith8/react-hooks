@@ -13,9 +13,10 @@ import { KanyeQuote } from "./components/kanye-quote";
 import GameOfLife from "./game-of-life/game-of-life";
 import TicTacToe from "./tic-tac-toe/tic-tac-toe";
 import ReactQuerySample from "./components/react-query-sample";
+import Counters from './counters'
 
 import { makeServer } from "./miragejs/server";
-import MirageApp from "./miragejs/app";
+import MirageApp from "./miragejs/mirage-ex";
 
 if (process.env.NODE_ENV === "development") {
   makeServer({ environment: "development" });
@@ -24,4 +25,4 @@ if (process.env.NODE_ENV === "development") {
 const App = () => <MirageApp />;
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Counters />, rootElement);
