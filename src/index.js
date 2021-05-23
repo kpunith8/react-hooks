@@ -25,4 +25,4 @@ if (process.env.NODE_ENV === "development") {
 const App = () => <MirageApp />;
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<Counters />, rootElement);
+ReactDOM.render(<App />, rootElement);
